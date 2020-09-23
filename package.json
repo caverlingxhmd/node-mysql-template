@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "author": "cangdu <1264889788@qq.com>",
+  "author": "caverling <1197419311@qq.com>",
   "license": "GPL",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bailicangdu/node-elm"
+    "url": "https://github.com/caverlingxhmd/node-mysql-template"
   },
   "dependencies": {
     "babel": "^6.23.0",

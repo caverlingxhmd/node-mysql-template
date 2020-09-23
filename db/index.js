@@ -1,18 +1,17 @@
 'use strict';
+import fs from "fs";
+import path from "path";
+import { Sequelize } from "sequelize";
+import config from "config-lite";
 
-const fs = require('fs');
-const path = require('path');
-const { Sequelize } = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require(path.join(__dirname, '/./config/config.json'))[env];
 const db = {};
-
+const { use_env_variable, database, username, password } = config.dbOptions
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+if (use_env_variable) {
+  sequelize = new Sequelize(use_env_variable, config.dbOptions);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(database, username, password, config.dbOptions);
 }
 
 const basedir = path.join(__dirname, "/./models")
@@ -36,6 +35,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-module.exports = db;
-
-// npx sequelize-cli model:generate --name project_info --attributes project_id:integer,project_name:string,icon_uri:string,dev_uri:string,test_uri:string,pre_uri:string,prod_uri:string,bussiness_type:integer,desc:string,git_address:string
+export default db;

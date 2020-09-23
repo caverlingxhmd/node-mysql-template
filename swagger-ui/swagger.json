@@ -13,9 +13,16 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "host": "petstore.swagger.io",
-  "basePath": "/v2",
-  "tags": [
+  "host": "127.0.0.1:8001",
+  "basePath": "/",
+  "tags": [{
+      "name": "project",
+      "description": "Everything about your Pets",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
     {
       "name": "pet",
       "description": "Everything about your Pets",
@@ -38,10 +45,241 @@
     }
   ],
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
+    "/project/add": {
+      "post": {
+        "tags": [
+          "project"
+        ],
+        "summary": "新增导航",
+        "description": "",
+        "operationId": "add",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "project_name",
+            "in": "query",
+            "description": "导航名称",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "business_type",
+            "in": "query",
+            "description": "导航类型 0:其他;1:AI数据平台;2:AI算法平台;3:AI工程平台;4:AI游戏;5：AI应用;6:AI服务;7:AI快应用卡片;8:活动;9:H5;",
+            "required": true,
+            "type": "string",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9
+            ]
+          },
+          {
+            "name": "icon_uri",
+            "in": "formData",
+            "description": "icon图标",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "dev_uri",
+            "in": "query",
+            "description": "开发环境",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "test_uri",
+            "in": "query",
+            "description": "测试环境",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pre_uri",
+            "in": "query",
+            "description": "预发环境",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "prod_uri",
+            "in": "query",
+            "description": "正式环境",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hosts",
+            "in": "query",
+            "description": "ip地址",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "description": "拥有者",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "description": "使用者",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "git_address",
+            "in": "query",
+            "description": "git地址",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "详情",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "请求成功返回数据结构，请点击Model查看",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "description": "状态码"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "返回信息"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "新增导航的id"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/project/list": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "获取导航列表",
+        "description": "",
+        "operationId": "list",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "请求成功返回数据结构，请点击Model查看",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "integer",
+                  "description": "状态码"
+                },
+                "msg": {
+                  "type": "string",
+                  "description": "返回信息"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "导航id"
+                      },
+                      "project_name": {
+                        "type": "string",
+                        "description": "导航名称"
+                      },
+                      "business_type": {
+                        "type": "integer",
+                        "description": "导航类型 0:其他;1:AI数据平台;2:AI算法平台;3:AI工程平台;4:AI游戏;5：AI应用;6:AI服务;7:AI快应用卡片;8:活动;9:H5;"
+                      },
+                      "icon_uri": {
+                        "type": "string",
+                        "description": "icon图标url"
+                      },
+                      "dev_uri": {
+                        "type": "string",
+                        "description": "开发环境url"
+                      },
+                      "test_uri": {
+                        "type": "string",
+                        "description": "测试环境url"
+                      },
+                      "pre_uri": {
+                        "type": "string",
+                        "description": "预发环境url"
+                      },
+                      "prod_uri": {
+                        "type": "string",
+                        "description": "正式环境url"
+                      },
+                      "hosts": {
+                        "type": "string",
+                        "description": "ip地址"
+                      },
+                      "owner": {
+                        "type": "string",
+                        "description": "拥有者"
+                      },
+                      "user": {
+                        "type": "string",
+                        "description": "使用者"
+                      },
+                      "git_address": {
+                        "type": "string",
+                        "description": "git地址"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "详情描述"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/pet": {
       "post": {
         "tags": [
@@ -58,30 +296,26 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Pet object that needs to be added to the store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Pet object that needs to be added to the store",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Pet"
           }
-        ],
+        }],
         "responses": {
           "405": {
             "description": "Invalid input"
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        "security": [{
+          "petstore_auth": [
+            "write:pets",
+            "read:pets"
+          ]
+        }]
       },
       "put": {
         "tags": [
@@ -98,17 +332,15 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Pet object that needs to be added to the store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Pet object that needs to be added to the store",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Pet"
           }
-        ],
+        }],
         "responses": {
           "400": {
             "description": "Invalid ID supplied"
@@ -120,14 +352,12 @@
             "description": "Validation exception"
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        "security": [{
+          "petstore_auth": [
+            "write:pets",
+            "read:pets"
+          ]
+        }]
       }
     },
     "/pet/findByStatus": {
@@ -142,25 +372,23 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Status values that need to be considered for filter",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "available",
-                "pending",
-                "sold"
-              ],
-              "default": "available"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
+        "parameters": [{
+          "name": "status",
+          "in": "query",
+          "description": "Status values that need to be considered for filter",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ],
+            "default": "available"
+          },
+          "collectionFormat": "multi"
+        }],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -175,14 +403,12 @@
             "description": "Invalid status value"
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        "security": [{
+          "petstore_auth": [
+            "write:pets",
+            "read:pets"
+          ]
+        }]
       }
     },
     "/pet/findByTags": {
@@ -197,19 +423,17 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "Tags to filter by",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
+        "parameters": [{
+          "name": "tags",
+          "in": "query",
+          "description": "Tags to filter by",
+          "required": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "collectionFormat": "multi"
+        }],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -224,14 +448,12 @@
             "description": "Invalid tag value"
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ],
+        "security": [{
+          "petstore_auth": [
+            "write:pets",
+            "read:pets"
+          ]
+        }],
         "deprecated": true
       }
     },
@@ -247,16 +469,14 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
+        "parameters": [{
+          "name": "petId",
+          "in": "path",
+          "description": "ID of pet to return",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -271,11 +491,9 @@
             "description": "Pet not found"
           }
         },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        "security": [{
+          "api_key": []
+        }]
       },
       "post": {
         "tags": [
@@ -291,8 +509,7 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "petId",
             "in": "path",
             "description": "ID of pet that needs to be updated",
@@ -320,14 +537,12 @@
             "description": "Invalid input"
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        "security": [{
+          "petstore_auth": [
+            "write:pets",
+            "read:pets"
+          ]
+        }]
       },
       "delete": {
         "tags": [
@@ -340,8 +555,7 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "api_key",
             "in": "header",
             "required": false,
@@ -364,14 +578,12 @@
             "description": "Pet not found"
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        "security": [{
+          "petstore_auth": [
+            "write:pets",
+            "read:pets"
+          ]
+        }]
       }
     },
     "/pet/{petId}/uploadImage": {
@@ -388,8 +600,7 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "petId",
             "in": "path",
             "description": "ID of pet to update",
@@ -420,14 +631,12 @@
             }
           }
         },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
+        "security": [{
+          "petstore_auth": [
+            "write:pets",
+            "read:pets"
+          ]
+        }]
       }
     },
     "/store/inventory": {
@@ -454,11 +663,9 @@
             }
           }
         },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        "security": [{
+          "api_key": []
+        }]
       }
     },
     "/store/order": {
@@ -473,17 +680,15 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "order placed for purchasing the pet",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "order placed for purchasing the pet",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/Order"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -509,18 +714,16 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "description": "ID of pet that needs to be fetched",
-            "required": true,
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 1,
-            "format": "int64"
-          }
-        ],
+        "parameters": [{
+          "name": "orderId",
+          "in": "path",
+          "description": "ID of pet that needs to be fetched",
+          "required": true,
+          "type": "integer",
+          "maximum": 10,
+          "minimum": 1,
+          "format": "int64"
+        }],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -547,17 +750,15 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "orderId",
-            "in": "path",
-            "description": "ID of the order that needs to be deleted",
-            "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "format": "int64"
-          }
-        ],
+        "parameters": [{
+          "name": "orderId",
+          "in": "path",
+          "description": "ID of the order that needs to be deleted",
+          "required": true,
+          "type": "integer",
+          "minimum": 1,
+          "format": "int64"
+        }],
         "responses": {
           "400": {
             "description": "Invalid ID supplied"
@@ -580,17 +781,15 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Created user object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "Created user object",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/User"
           }
-        ],
+        }],
         "responses": {
           "default": {
             "description": "successful operation"
@@ -610,20 +809,18 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "List of user object",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "List of user object",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/User"
             }
           }
-        ],
+        }],
         "responses": {
           "default": {
             "description": "successful operation"
@@ -643,20 +840,18 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "List of user object",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
-              }
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "List of user object",
+          "required": true,
+          "schema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/User"
             }
           }
-        ],
+        }],
         "responses": {
           "default": {
             "description": "successful operation"
@@ -676,8 +871,7 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "username",
             "in": "query",
             "description": "The user name for login",
@@ -749,15 +943,13 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "The name that needs to be fetched. Use user1 for testing. ",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [{
+          "name": "username",
+          "in": "path",
+          "description": "The name that needs to be fetched. Use user1 for testing. ",
+          "required": true,
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -784,8 +976,7 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "username",
             "in": "path",
             "description": "name that need to be updated",
@@ -822,15 +1013,13 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "The name that needs to be deleted",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [{
+          "name": "username",
+          "in": "path",
+          "description": "The name that needs to be deleted",
+          "required": true,
+          "type": "string"
+        }],
         "responses": {
           "400": {
             "description": "Invalid username supplied"

@@ -2,6 +2,13 @@
 
 module.exports = {
   port: parseInt(process.env.PORT, 10) || 8001,
+  dbOptions: {
+    username: "root",
+    password: "root",
+    database: "test",
+    host: "127.0.0.1",
+    dialect: "mysql"
+  },
   session: {
     name: 'SID',
     secret: 'SID',

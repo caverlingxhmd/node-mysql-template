@@ -11,6 +11,8 @@ import chalk from 'chalk';
 
 const app = express();
 
+app.use("/swagger-ui", express.static('./swagger-ui'));
+
 app.all('*', (req, res, next) => {
   const { origin, Origin, referer, Referer } = req.headers;
   const allowOrigin = origin || Origin || referer || Referer || '*';
@@ -64,7 +66,6 @@ router(app);
 
 app.use(history());
 // app.use(express.static('./public'));
-app.use("/swagger-ui", express.static('./swagger-ui'));
 app.listen(config.port, "127.0.0.1", () => {
   console.log(
     chalk.green(`成功监听端口：${config.port}`)
