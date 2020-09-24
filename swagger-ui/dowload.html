@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0/axios.min.js"></script>
+  <script>
+    axios.get('/swagger-ui/favicon-32x32.png', {
+        responseType: 'blob' //返回数据的格式，可选值为arraybuffer,blob,document,json,text,stream，默认值为json
+      })
+      .then(res => {
+        const blob = new Blob([res.data])
+        const url = window.URL.createObjectURL(blob);
+        let a = document.createElement("a");
+        a.setAttribute("href", url)
+        a.setAttribute("download", 'favicon-32x32.png')
+        a.click()
+        window.URL.revokeObjectURL(url);
+        a = null
+      })
+      .catch(err => {
+        console.log(`接口调用失败`);
+        console.log(err);
+      })
+  </script>
+</body>
+
+</html>
